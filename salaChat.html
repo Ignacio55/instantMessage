@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sala de chat</title>
+    
+    <!--  <link rel="stylesheet" href="/static/css/bootstrap.css">
+	  	<link rel="stylesheet" href="/static/css/bootstrap-theme.css">-->
+    <script type="text/javascript" src="cicloMensajes.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body onload="llenarMensajes()">
+    <header>
+		<h1>Sala de chat</h1>
+		<a href="index.php">Logout</a>
+	</header>
+    <main>
+  
+
+    	<form class="" id="form1" name="form1" method="post" action="salaChat.php">
+	        <div id="chat">
+	            
+	        </div>
+	        <div id="texto">
+	            <input id="idMensajeTexto" name="mensaje" type="text">
+	            <input type="button" name="botonEnviar" value="Enviar">
+	        </div>
+	        <div id="usuarios">
+	            
+	        </div>
+        </form>
+        <footer></footer>
+        <!--<script src="/static/js/bootstrap.js"></script>-->
+    </main>
+    
+</body>
+</html>
