@@ -3,13 +3,16 @@ session_start();
 $con = mysqli_connect("localhost:3306","administrador","123Daw$321","instantMessage") or die("No se pudo conectar");
 
 
-    if (isset($_POST['eliminar'])){
-        echo($_POST['id']);
-        $id=$_POST['id'];
-        // Consulta SQL para obtener los datos de los centros.
-        $sql="delete from usuarios where usuario_id='$id'";
-        $resultados=mysqli_query($con,$sql) or die(mysqli_error());
-    }
+if (isset($_POST['botonEditar'])){
+    $id=$_POST['id'];
+    $nombre=$_POST['campoNombre'];
+    $password=$_POST['campoPassword'];
+    $email=$_POST['campoEmail'];
+    
+    // Consulta SQL para obtener los datos de los centros.
+    $sql="UPDATE usuarios SET nombre='$nombre', email='$password', contraseña='$email' WHERE usuario_id='$id'";
+    $resultados=mysqli_query($con,$sql) or die(mysqli_error());
+}
 
 
 ?>
@@ -31,7 +34,7 @@ $con = mysqli_connect("localhost:3306","administrador","123Daw$321","instantMess
 			<a href="index.php">&#xe163;</a>
 		</header>
 		<main>
-		<form id="form1" name="form1" method="post" action="backend.php">
+		<form id="form1" name="form1" method="post" action="edit.php">
 		<div class="row justify-content-center">
 			<h1 class="col-6">Usuarios registrados</h1>
 			
@@ -40,20 +43,23 @@ $con = mysqli_connect("localhost:3306","administrador","123Daw$321","instantMess
                 $ssql="SELECT * FROM usuarios";
                 $result = mysqli_query($con, $ssql) or die ( "Algo ha ido mal en la consulta a la base de datos");
                 if(mysqli_num_rows($result)){               
-                    $tabla="<table>";
+                    $select="<select name='id'>";
 
                     while($reg=mysqli_fetch_array($result)){
-                        $tabla=$tabla."<tr><td>".$reg['usuario_id']."</td><td>".$reg['nombre']."</td><td>".
-                            $reg['email']."</td><td><input type='submit' name='eliminar' value='".$reg['usuario_id']."'></td></tr>";
+                        $select=$select."<option value='".$reg['usuario_id']."'>".$reg['nombre']."</option>";
                     }
                     
-                    $tabla=$tabla."</table>";
-                    echo($tabla);
+                    $select=$select."</select>";
+                    echo($select);
                 }else{
                     echo("No hay usuarios registrados");
                 }
 			?>
 			</div>
+			<label>Nombre:<input name="campoNombre" type="text"></label>
+			<label>Contraseña:<input name="campoPassword" type="password"></label>
+			<label>Email:<input name="campoEmail" type="email"></label>
+			<input type="submit" class="btn btn-success" name="botonEditar" value="Guardar"/>
 		</form>
 		</main>
 		<script src="/static/js/bootstrap.js"></script>

@@ -14,14 +14,12 @@ if(isset($_POST['botonAcceder'])){
         $reg = mysqli_fetch_array($result);
         
         if($reg['contraseña'] == $password){
+            $_SESSION['user'] = $nombre;
+            
             if($reg['permisos'] == "admin"){
-          
-                $_SESSION['user'] = $nombre;
                 header("refresh:5,url='backend.php'");
-                
             }else if($reg['permisos']=="usuario"){
-                $_SESSION['user']=$nombre;
-                header("refresh:5,url='inicio.php'");
+                header("refresh:5,url='frontend.php'");
             }
         }
     }else{
